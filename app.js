@@ -9,6 +9,10 @@ let config = {
             debug: false
         },
     },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     scene: {
         preload: preload,
         create: create,
@@ -150,6 +154,10 @@ function update() {
 
         isGameStarted = false;
     }
+
+    if (isGameStarted) {
+        messageToPlayer.setVisible(false);
+    }
 }
 
 function spawnPipes() {
@@ -158,11 +166,13 @@ function spawnPipes() {
 
     const topPipe = pipes.create(800, centerY - gap/4, "column")
         .setOrigin(0.5, 1)
-        .setImmovable(true);
+        .setImmovable(true)
+        .setScale(2);
 
     const bottomPipe = pipes.create(800, centerY + gap/4, "column")
         .setOrigin(0.5, 0)
-        .setImmovable(true);
+        .setImmovable(true)
+        .setScale(2);
 
     topPipe.body.allowGravity = false;
     bottomPipe.body.allowGravity = false;
